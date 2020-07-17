@@ -59,7 +59,7 @@ void error_at(char *loc, char *fmt, ...) {
 }
 
 // Consumes the current token if it matches 'op'.
-bool consume(char op) {
+bool consume(char *op) {
 	if (token->kind != TK_RESERVED || strlen(op) != token->len ||
 			memcmp(token->str, op, token->len))
 		return false;
@@ -111,7 +111,7 @@ Token *tokenize() {
 	Token *cur = &head;
 
 	while (*p) {
-		// skip empty
+		// Skip whitespace characters
 		if (isspace(*p)) {
 			p++;
 			continue;
